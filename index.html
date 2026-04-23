@@ -20,7 +20,6 @@
       scroll-behavior: smooth;
     }
 
-    /* No dark overlay — pure background image */
     :root {
       --pink: #ec078d;
       --pink-light: rgba(236, 7, 141, 0.08);
@@ -39,7 +38,6 @@
       padding: 0 20px;
     }
 
-    /* animations */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -55,7 +53,6 @@
       box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.15);
     }
 
-    /* navbar */
     .navbar {
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
@@ -77,7 +74,6 @@
       align-items: center;
       gap: 14px;
     }
-    /* larger logo, square with rounded corners */
     .logo-icon {
       width: 60px;
       height: 60px;
@@ -115,7 +111,6 @@
     }
     .nav-links a:hover { color: var(--pink); }
 
-    /* buttons */
     .btn-primary {
       background: var(--pink);
       color: white;
@@ -143,7 +138,6 @@
     }
     .btn-outline:hover { background: var(--pink-light); }
 
-    /* glass cards */
     .glass-card {
       background: var(--card-bg);
       backdrop-filter: blur(4px);
@@ -174,7 +168,6 @@
       border-radius: 4px;
     }
 
-    /* branches */
     .branches-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -193,7 +186,6 @@
     .branch-addr { color: var(--text-muted); margin: 12px 0; line-height: 1.4; }
     .branch-phone { display: inline-block; margin-top: 10px; color: var(--pink); font-weight: 500; text-decoration: none; }
 
-    /* benefits */
     .benefits-grid {
       display: flex;
       flex-wrap: wrap;
@@ -214,7 +206,6 @@
     .benefit-card h4 { font-size: 1.35rem; margin: 0 0 10px 0; font-weight: 700; }
     .benefit-card p { color: var(--text-muted); line-height: 1.5; font-size: 0.95rem; }
 
-    /* instagram */
     .insta-embed-wrapper {
       background: var(--card-solid);
       border-radius: 28px;
@@ -238,7 +229,6 @@
     .instagram-post img { width: 100%; display: block; }
     .instagram-post p { padding: 14px; font-size: 0.85rem; color: var(--text-muted); }
 
-    /* scrolling logos bar (square, not round) */
     .scrolling-logos {
       background: rgba(255,255,255,0.7);
       backdrop-filter: blur(6px);
@@ -268,7 +258,6 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* contact */
     .info-wrapper {
       display: flex;
       flex-wrap: wrap;
@@ -282,13 +271,23 @@
     .hours-table td { padding: 12px 8px; border-bottom: 1px solid var(--border-light); }
     .highlight { color: var(--pink); font-weight: 600; }
 
-    /* packages */
+    /* Updated packages section */
     .packages-cta {
       background: var(--card-solid);
       border-radius: 40px;
       padding: 45px 28px;
       text-align: center;
       box-shadow: var(--shadow);
+    }
+    .offer-badge {
+      background: var(--pink);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 60px;
+      display: inline-block;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
     }
     .price-badge {
       background: var(--pink);
@@ -297,7 +296,7 @@
       border-radius: 60px;
       display: inline-block;
       font-weight: 700;
-      margin: 20px 0;
+      margin: 15px 0;
       font-size: 1.1rem;
     }
     .price-grid {
@@ -311,7 +310,19 @@
       background: #f8f8f8;
       border-radius: 24px;
       padding: 20px 24px;
-      min-width: 150px;
+      min-width: 170px;
+    }
+    .price-card strong {
+      font-size: 1.2rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .guest-offer {
+      background: var(--pink-light);
+      padding: 20px;
+      border-radius: 32px;
+      margin: 25px 0 15px;
+      font-weight: 500;
     }
 
     footer {
@@ -324,7 +335,6 @@
       margin-top: 20px;
     }
 
-    /* mobile-first adjustments */
     @media (max-width: 768px) {
       .container { padding: 0 18px; }
       .nav-container { flex-direction: column; text-align: center; }
@@ -332,17 +342,12 @@
       .nav-links { justify-content: center; gap: 18px; }
       .section-title { font-size: 1.8rem; }
       .glass-card { padding: 28px 20px; }
-      .hero-content h1 { font-size: 2rem; }
       .btn-primary, .btn-outline { padding: 10px 20px; font-size: 0.85rem; }
-      .branch-card { padding: 20px; }
-      .scrolling-logos { padding: 14px 0; }
-      .logo-track span { padding: 5px 20px; margin: 0 12px; font-size: 0.85rem; }
+      .price-card { min-width: 140px; padding: 15px; }
     }
-
     @media (max-width: 480px) {
       .benefit-card { min-width: 100%; }
-      .price-card { min-width: 130px; }
-      .hero-stats { margin-top: 20px; }
+      .price-card { width: 100%; }
     }
   </style>
 </head>
@@ -373,9 +378,9 @@
       <div class="glass-card animate">
         <div style="display: flex; flex-wrap: wrap; gap: 35px; align-items: center;">
           <div style="flex: 1.2;">
-            <div style="background: var(--pink-light); display: inline-block; padding: 6px 18px; border-radius: 40px; font-size: 0.8rem; font-weight: 600; margin-bottom: 20px; color: var(--pink);">Կանանց բացառիկ ֆիթնես ցանց</div>
-            <h1 style="font-size: 2.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px;">Քո կերպարանափոխությունը <span style="color:var(--pink)">սկսվում է</span> այստեղ</h1>
-            <p style="color: var(--text-muted); max-width: 500px; margin-bottom: 30px; font-size: 1rem;">12 մասնաճյուղ Երևանում, անվտանգ մարզասրահներ, խմբակային ծրագրեր և պրոֆեսիոնալ մարզիչներ։</p>
+            <div style="background: var(--pink-light); display: inline-block; padding: 6px 18px; border-radius: 40px; font-size: 0.8rem; font-weight: 600; margin-bottom: 20px; color: var(--pink);">✨ Գարնանային հատուկ առաջարկ</div>
+            <h1 style="font-size: 2.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px;">Արի <span style="color:var(--pink)">Lady Zone</span> և դարձիր ակումբի անդամ</h1>
+            <p style="color: var(--text-muted); max-width: 550px; margin-bottom: 20px; font-size: 1rem;"><strong>Վճարումներդ սկսիր կատարել Մայիս ամսից 💖</strong><br>Ստացիր անսահմանափակ հյուրի հնարավորություն և արի մարզվելու մայրիկիդ, քույրիկիդ կամ ընկերուհուդ հետ միասին 🫶🏻✨</p>
             <div style="display: flex; gap: 15px; flex-wrap: wrap;">
               <a href="#packages" class="btn-primary">Տեսնել փաթեթները</a>
               <a href="tel:+37494015011" class="btn-outline">Զանգահարել</a>
@@ -422,7 +427,6 @@
         <div class="benefit-card hover-lift"><h4>Sun bath & Roof zone</h4><p>Հանգստի գոտի մարզումից հետո</p></div>
       </div>
 
-      <!-- Scrolling brand bar (square text logos, not round) -->
       <div class="scrolling-logos">
         <div class="logo-track">
           <span>LADY ZONE</span> <span>FITNESS</span> <span>PILATES</span> <span>YOGA</span> <span>WOMEN</span> <span>STRENGTH</span>
@@ -430,7 +434,6 @@
         </div>
       </div>
 
-      <!-- Instagram images gallery (replaceable) -->
       <div class="insta-embed-wrapper">
         <p style="font-weight: 500;">🖼️ Նկարներ մեր ակումբից (կարող եք փոխարինել ձեր ներբեռնած Instagram-ի նկարներով)</p>
         <div class="instagram-grid" id="customInstaGallery">
@@ -440,33 +443,48 @@
         </div>
       </div>
 
-      <!-- Instagram Reel -->
       <div class="insta-embed-wrapper">
         <p>🎥 Տեսանյութ (Reel) մեր պաշտոնական էջից</p>
         <iframe src="https://www.instagram.com/reel/DBXxq9xIOpZ/embed" width="100%" height="440" frameborder="0" style="border-radius: 24px;"></iframe>
       </div>
 
-      <!-- Quote -->
       <div style="background: var(--card-solid); border-left: 4px solid var(--pink); padding: 28px; border-radius: 28px; margin-top: 25px;">
         <p style="font-style: italic;">«Լավագույն որոշումն էր միանալ Lady Zone-ին: Բարեկազմ մարմին, էներգիա և ընկերական միջավայր: Ես փոխվել եմ ինչպես արտաքնապես, այնպես էլ ներքին վստահությամբ» — Անի, Lady Zone անդամ</p>
       </div>
     </div>
   </section>
 
-  <!-- Packages -->
+  <!-- Packages section with new offer -->
   <section id="packages">
     <div class="container">
       <div class="title-deco"></div>
-      <h2 class="section-title">Փաթեթներ</h2>
+      <h2 class="section-title">💘 Առաջարկը գործում է այս փաթեթների համար</h2>
       <div class="packages-cta hover-lift">
-        <h3 style="font-size: 1.8rem;">✨ Ամսական անսահմանափակ</h3>
-        <div class="price-badge">35,000 ֏ / ամիս</div>
+        <div class="offer-badge">✨ Վճարումներդ սկսիր Մայիս ամսից ✨</div>
+        <div class="guest-offer">
+          <strong>🫶🏻 Անսահմանափակ հյուրի հնարավորություն</strong><br>
+          Արի մարզվելու մայրիկիդ, քույրիկիդ կամ ընկերուհուդ հետ միասին
+        </div>
         <div class="price-grid">
-          <div class="price-card"><strong>4 պարապմունք</strong><br>12,000 ֏</div>
-          <div class="price-card"><strong>8 պարապմունք</strong><br>21,000 ֏</div>
-          <div class="price-card"><strong>Անհատական (4x)</strong><br>45,000 ֏</div>
+          <div class="price-card">
+            <strong>⏰ 08:30 - 11:00</strong>
+            9,900 ֏
+          </div>
+          <div class="price-card">
+            <strong>⏰ 08:30 - 17:00</strong>
+            11,900 ֏
+          </div>
+          <div class="price-card">
+            <strong>⏰ 08:30 - 22:00</strong>
+            13,900 ֏
+          </div>
+          <div class="price-card">
+            <strong>💪 Անհատական մարզումներ</strong>
+            22,000 ֏
+          </div>
         </div>
         <a href="tel:+37494015011" class="btn-primary" style="margin-top: 28px; display: inline-block;">Գրանցվել անվճար փորձնականին</a>
+        <p style="margin-top: 20px; font-size: 0.85rem; color: var(--text-muted);">* Առաջարկը գործում է սահմանափակ ժամանակով</p>
       </div>
     </div>
   </section>
