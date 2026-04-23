@@ -7,37 +7,44 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    /* Colors extracted directly from the logo */
-    :root {
-      --bg-dark: #2B2B2B;      /* dark gray from logo background */
-      --pink-logo: #E83C5F;    /* pink from the LZ letters */
-      --pink-light: #fce4ec;
-      --text-light: #f0f0f0;
-      --text-gray: #b0b0b0;
-      --card-bg: #3A3A3A;
-      --border-gray: #4a4a4a;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    
+
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-light);
+      background: url('https://wallpapers.com/images/hd/white-wall-background-h70bt01qvbp3lmct.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #111;
       scroll-behavior: smooth;
     }
-    
+
+    /* Pink color updated to #ec078d */
+    :root {
+      --pink-main: #ec078d;
+      --pink-light: rgba(236, 7, 141, 0.1);
+      --pink-glow: rgba(236, 7, 141, 0.2);
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --dark-overlay: rgba(0, 0, 0, 0.7);
+      --text-dark: #1a1a1a;
+      --text-gray: #4a4a4a;
+      --border-light: #e0e0e0;
+      --shadow: 0 15px 35px rgba(0,0,0,0.05);
+    }
+
     .container {
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 24px;
     }
-    
-    /* navbar */
+
+    /* navbar with semi-transparent to let background show */
     .navbar {
-      background: rgba(43, 43, 43, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border-gray);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(4px);
+      border-bottom: 1px solid rgba(236, 7, 141, 0.2);
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -53,30 +60,32 @@
     .logo-area {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 15px;
     }
+    /* Bigger logo */
     .logo-icon {
-      width: 48px;
-      height: 48px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
-      background: var(--pink-logo);
+      background: var(--pink-main);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     .logo-icon img {
       width: 100%;
-      height: auto;
+      height: 100%;
       object-fit: cover;
     }
     .logo-text {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 800;
       letter-spacing: -0.5px;
-      color: white;
+      color: var(--text-dark);
     }
-    .logo-text span { color: var(--pink-logo); }
+    .logo-text span { color: var(--pink-main); }
     .nav-links {
       display: flex;
       gap: 32px;
@@ -86,83 +95,51 @@
       transition: 0.2s;
       color: var(--text-gray);
     }
-    .nav-links a:hover { color: var(--pink-logo); }
-    
+    .nav-links a:hover { color: var(--pink-main); }
+
     /* buttons */
     .btn-primary {
-      background: var(--pink-logo);
+      background: var(--pink-main);
       color: white;
       padding: 12px 32px;
       border-radius: 40px;
       font-weight: 600;
-      transition: 0.2s;
       display: inline-block;
+      transition: 0.2s;
       border: none;
       cursor: pointer;
+      box-shadow: 0 2px 8px rgba(236,7,141,0.3);
     }
-    .btn-primary:hover { background: #c1354f; transform: translateY(-2px); }
+    .btn-primary:hover { background: #c00874; transform: translateY(-2px); }
     .btn-outline {
-      border: 1.5px solid var(--text-gray);
+      border: 1.5px solid var(--pink-main);
       background: transparent;
       padding: 10px 28px;
       border-radius: 40px;
       font-weight: 500;
       transition: 0.2s;
-      color: var(--text-light);
+      color: var(--pink-main);
     }
-    .btn-outline:hover { border-color: var(--pink-logo); color: var(--pink-logo); }
-    
-    /* hero */
-    .hero {
-      padding: 60px 0 70px;
+    .btn-outline:hover { background: var(--pink-light); }
+
+    /* section cards (white with opacity) */
+    section {
+      padding: 70px 0;
     }
-    .hero-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 48px;
-      align-items: center;
-    }
-    .hero-content { flex: 1.2; }
-    .hero-badge {
-      background: rgba(232, 60, 95, 0.15);
-      color: var(--pink-logo);
-      display: inline-block;
-      padding: 6px 14px;
-      border-radius: 30px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-    .hero-content h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-    .hero-content h1 .pink { color: var(--pink-logo); }
-    .hero-desc {
-      font-size: 1rem;
-      color: var(--text-gray);
-      max-width: 500px;
-      margin-bottom: 32px;
-    }
-    .hero-stats {
-      flex: 0.8;
+    .section-card {
       background: var(--card-bg);
-      border-radius: 28px;
-      padding: 28px;
-      border: 1px solid var(--border-gray);
-      text-align: center;
+      border-radius: 40px;
+      padding: 40px 30px;
+      backdrop-filter: blur(2px);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(236,7,141,0.15);
     }
-    .hero-stats h3 { font-size: 2rem; font-weight: 800; color: var(--pink-logo); }
-    .hero-stats p { color: var(--text-gray); }
-    
-    section { padding: 70px 0; border-bottom: 1px solid var(--border-gray); }
     .section-title {
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 12px;
       text-align: center;
+      color: var(--text-dark);
     }
     .section-sub {
       text-align: center;
@@ -171,31 +148,32 @@
       margin: 0 auto 48px auto;
     }
     .title-deco {
-      width: 60px;
-      height: 3px;
-      background: var(--pink-logo);
+      width: 70px;
+      height: 4px;
+      background: var(--pink-main);
       margin: 0 auto 20px auto;
-      border-radius: 3px;
+      border-radius: 4px;
     }
-    
-    /* branches */
+
+    /* branches grid */
     .branches-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 28px;
     }
     .branch-card {
-      background: var(--card-bg);
-      border-radius: 24px;
+      background: white;
+      border-radius: 28px;
       padding: 24px;
-      border: 1px solid var(--border-gray);
+      border: 1px solid var(--border-light);
       transition: 0.2s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.03);
     }
-    .branch-card:hover { border-color: var(--pink-logo); }
+    .branch-card:hover { border-color: var(--pink-main); transform: translateY(-4px); }
     .branch-card h3 { font-size: 1.4rem; margin-bottom: 10px; font-weight: 700; }
     .branch-addr { color: var(--text-gray); margin: 12px 0; }
-    .branch-phone { display: inline-block; margin-top: 10px; font-size: 0.9rem; color: var(--pink-logo); font-weight: 500; }
-    
+    .branch-phone { display: inline-block; margin-top: 10px; color: var(--pink-main); font-weight: 500; }
+
     /* benefits */
     .benefits-grid {
       display: flex;
@@ -207,72 +185,73 @@
     .benefit-card {
       flex: 1;
       min-width: 220px;
-      background: var(--card-bg);
+      background: white;
       border-radius: 28px;
       padding: 28px 20px;
       text-align: center;
-      border: 1px solid var(--border-gray);
+      border: 1px solid var(--border-light);
     }
     .benefit-card h4 { font-size: 1.3rem; margin: 16px 0 10px; }
-    .benefit-card p { color: var(--text-gray); }
-    
+    .circle-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--pink-light);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--pink-main);
+      font-size: 26px;
+    }
+
     /* instagram embed */
     .insta-embed-wrapper {
-      background: var(--card-bg);
+      background: white;
       border-radius: 28px;
       padding: 20px;
-      border: 1px solid var(--border-gray);
+      border: 1px solid var(--border-light);
       margin: 20px 0;
     }
     .instagram-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 20px;
       margin-top: 20px;
     }
     .instagram-post {
-      background: #1f1f1f;
+      background: #fafafa;
       border-radius: 20px;
       overflow: hidden;
-      border: 1px solid var(--border-gray);
+      border: 1px solid #eee;
     }
-    .instagram-post img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .instagram-post p {
-      padding: 12px;
-      font-size: 0.85rem;
-      color: var(--text-gray);
-    }
-    
-    /* contact hours */
+    .instagram-post img { width: 100%; display: block; }
+    .instagram-post p { padding: 12px; font-size: 0.85rem; color: var(--text-gray); }
+
+    /* contact & hours */
     .info-wrapper {
       display: flex;
       flex-wrap: wrap;
       gap: 40px;
-      background: var(--card-bg);
+      background: white;
       border-radius: 32px;
       padding: 40px;
-      border: 1px solid var(--border-gray);
     }
-    .contact-item { margin: 20px 0; display: flex; align-items: center; gap: 12px; }
-    .hours-table td { padding: 12px 8px; border-bottom: 1px solid var(--border-gray); }
-    .highlight { color: var(--pink-logo); font-weight: 600; }
-    
+    .contact-item { margin: 20px 0; display: flex; gap: 12px; align-items: center; }
+    .hours-table td { padding: 12px 8px; border-bottom: 1px solid #eee; }
+    .highlight { color: var(--pink-main); font-weight: 600; }
+
     /* packages */
     .packages-cta {
-      background: var(--card-bg);
+      background: white;
       border-radius: 40px;
       padding: 48px 32px;
       text-align: center;
       margin: 40px 0 20px;
     }
     .price-badge {
-      background: var(--pink-logo);
+      background: var(--pink-main);
       color: white;
-      padding: 8px 20px;
+      padding: 8px 24px;
       border-radius: 50px;
       display: inline-block;
       font-weight: 700;
@@ -286,35 +265,23 @@
       margin-top: 24px;
     }
     .price-card {
-      background: #2a2a2a;
+      background: #f9f9f9;
       border-radius: 24px;
       padding: 20px;
-      min-width: 160px;
-      border: 1px solid var(--border-gray);
+      min-width: 150px;
     }
-    
     footer {
-      background: #1f1f1f;
-      padding: 48px 0 32px;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(4px);
+      color: #ddd;
+      padding: 40px 0;
       text-align: center;
-      color: var(--text-gray);
-      border-top: 1px solid var(--border-gray);
-    }
-    .circle-icon {
-      width: 48px;
-      height: 48px;
-      background: rgba(232, 60, 95, 0.2);
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--pink-logo);
-      font-size: 24px;
-      margin-bottom: 16px;
+      border-top: 1px solid rgba(236,7,141,0.3);
     }
     @media (max-width: 768px) {
       .nav-container { flex-direction: column; }
-      .hero-content h1 { font-size: 2rem; }
+      .section-title { font-size: 1.6rem; }
+      .logo-text { font-size: 1.3rem; }
     }
   </style>
 </head>
@@ -338,127 +305,137 @@
   </div>
 </nav>
 
-<section id="home">
-  <div class="container hero">
-    <div class="hero-grid">
-      <div class="hero-content">
-        <div class="hero-badge"><i class="fas fa-female"></i> Կանանց ֆիթնես ցանց</div>
-        <h1>Քո կերպարանափոխությունը <span class="pink">սկսվում է</span> այստեղ</h1>
-        <p class="hero-desc">12 մասնաճյուղ Երևանում, անվտանգ մարզասրահներ, խմբակային ծրագրեր և պրոֆեսիոնալ մարզիչներ:</p>
-        <div style="display: flex; gap: 16px;">
-          <a href="#packages" class="btn-primary">Տեսնել փաթեթները</a>
-          <a href="tel:+37494015011" class="btn-outline">Զանգահարել</a>
+<main>
+  <!-- Hero section -->
+  <section id="home" style="padding-top: 40px;">
+    <div class="container">
+      <div class="section-card">
+        <div class="hero-grid" style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center;">
+          <div style="flex:1.2">
+            <div class="hero-badge" style="background: var(--pink-light); color: var(--pink-main); display: inline-block; padding: 6px 14px; border-radius: 30px; font-size:0.8rem; font-weight:600; margin-bottom:20px;">
+              <i class="fas fa-female"></i> Կանանց ֆիթնես ցանց
+            </div>
+            <h1 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 20px;">Քո կերպարանափոխությունը <span style="color:var(--pink-main)">սկսվում է</span> այստեղ</h1>
+            <p style="color: var(--text-gray); max-width: 500px; margin-bottom: 32px;">12 մասնաճյուղ Երևանում, անվտանգ մարզասրահներ, խմբակային ծրագրեր և պրոֆեսիոնալ մարզիչներ:</p>
+            <div style="display: flex; gap: 16px;">
+              <a href="#packages" class="btn-primary">Տեսնել փաթեթները</a>
+              <a href="tel:+37494015011" class="btn-outline">Զանգահարել</a>
+            </div>
+          </div>
+          <div style="flex:0.8; background: #f9f9f9; border-radius: 28px; padding: 28px; text-align: center;">
+            <h3 style="font-size: 2rem; color: var(--pink-main);">12+</h3>
+            <p>Հարմարավետ մասնաճյուղեր</p>
+            <h3 style="margin-top: 20px; font-size: 2rem; color: var(--pink-main);">🏆 2013</h3>
+            <p>Հիմնադրման տարի</p>
+          </div>
         </div>
       </div>
-      <div class="hero-stats">
-        <h3>12+</h3>
-        <p>Հարմարավետ մասնաճյուղեր</p>
-        <h3 style="margin-top: 20px;">🏆 2013</h3>
-        <p>Հիմնադրման տարի</p>
-      </div>
     </div>
+  </section>
 
-    <!-- Instagram Profile Feed – shows real images & videos from @lady_zone_fitness_club -->
+  <!-- Instagram live feed (real images/videos) -->
+  <div class="container" style="margin-top: -30px;">
     <div class="insta-embed-wrapper">
-      <p style="font-weight: 600; margin-bottom: 12px;"><i class="fab fa-instagram"></i> 📸 Կենդանի Instagram ֆիդ (իրական նկարներ և տեսանյութեր)</p>
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/lady_zone_fitness_club/" data-instgrm-version="14" style="background:#1f1f1f; border-radius: 18px; width:100%; margin:0 auto;"></blockquote>
+      <p style="font-weight: 600; margin-bottom: 12px;"><i class="fab fa-instagram" style="color:var(--pink-main);"></i> 📸 Կենդանի Instagram ֆիդ (իրական նկարներ և տեսանյութեր @lady_zone_fitness_club)</p>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/lady_zone_fitness_club/" data-instgrm-version="14" style="background:#fff; border-radius: 18px; width:100%; margin:0 auto;"></blockquote>
     </div>
   </div>
-</section>
 
-<!-- 12 Branches -->
-<section id="branches">
-  <div class="container">
-    <div class="title-deco"></div>
-    <h2 class="section-title">Մեր մասնաճյուղերը</h2>
-    <p class="section-sub">Երևան, 12 հասցեով</p>
-    <div class="branches-grid" id="branchesGrid"></div>
-  </div>
-</section>
-
-<!-- Benefits + Instagram posts gallery (you can replace images with actual downloaded ones) -->
-<section id="benefits">
-  <div class="container">
-    <div class="title-deco"></div>
-    <h2 class="section-title">Ի՞նչ ես ստանում</h2>
-    <div class="benefits-grid">
-      <div class="benefit-card"><div class="circle-icon"><i class="fas fa-dumbbell"></i></div><h4>Հիդրավլիկ սարքեր</h4><p>Անվտանգ մարզում</p></div>
-      <div class="benefit-card"><div class="circle-icon"><i class="fas fa-heart"></i></div><h4>Խմբակային դասեր</h4><p>Յոգա, զումբա, HIIT</p></div>
-      <div class="benefit-card"><div class="circle-icon"><i class="fas fa-chalkboard-user"></i></div><h4>Անհատական մարզիչ</h4><p>Անհատական ծրագիր</p></div>
-      <div class="benefit-card"><div class="circle-icon"><i class="fas fa-spa"></i></div><h4>Sun bath & Roof zone</h4><p>Հանգստի գոտի</p></div>
+  <!-- 12 branches -->
+  <section id="branches">
+    <div class="container">
+      <div class="title-deco"></div>
+      <h2 class="section-title">Մեր մասնաճյուղերը</h2>
+      <p class="section-sub">Երևան, 12 հասցեով — ընտրիր քեզ մոտ գտնվողը</p>
+      <div class="branches-grid" id="branchesGrid"></div>
     </div>
+  </section>
 
-    <!-- DIRECT INSTAGRAM IMAGES GALLERY (manually replace with actual photos from their page) -->
-    <div class="insta-embed-wrapper">
-      <p style="font-weight: 600;"><i class="fab fa-instagram"></i> 🖼️ Նկարներ մեր Instagram-ից (կարող եք փոխարինել ձեր ներբեռնած նկարներով)</p>
-      <div class="instagram-grid" id="customInstaGallery">
-        <!-- These placeholders can be replaced with real images from @lady_zone_fitness_club -->
-        <div class="instagram-post"><img src="https://via.placeholder.com/300x300/3A3A3A/E83C5F?text=+Download+from+IG" alt="IG image 1"><p>💪 Ուժեղ կանանց մարզում</p></div>
-        <div class="instagram-post"><img src="https://via.placeholder.com/300x300/3A3A3A/E83C5F?text=+Lady+Zone+Group" alt="IG image 2"><p>🧘 Խմբակային յոգա</p></div>
-        <div class="instagram-post"><img src="https://via.placeholder.com/300x300/3A3A3A/E83C5F?text=+Fitness+motivation" alt="IG image 3"><p>🏋️‍♀️ Արդյունքների օր</p></div>
+  <!-- Benefits + gallery (placeholders ready for real IG images) -->
+  <section id="benefits">
+    <div class="container">
+      <div class="title-deco"></div>
+      <h2 class="section-title">Ի՞նչ ես ստանում</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card"><div class="circle-icon"><i class="fas fa-dumbbell"></i></div><h4>Հիդրավլիկ սարքեր</h4><p>Անվտանգ մարզում</p></div>
+        <div class="benefit-card"><div class="circle-icon"><i class="fas fa-heart"></i></div><h4>Խմբակային դասեր</h4><p>Յոգա, զումբա, HIIT</p></div>
+        <div class="benefit-card"><div class="circle-icon"><i class="fas fa-chalkboard-user"></i></div><h4>Անհատական մարզիչ</h4><p>Անհատական ծրագիր</p></div>
+        <div class="benefit-card"><div class="circle-icon"><i class="fas fa-spa"></i></div><h4>Sun bath & Roof zone</h4><p>Հանգստի գոտի</p></div>
       </div>
-      <p style="font-size: 0.85rem; margin-top: 12px;">💡 <strong>Ինչպես ավելացնել իրական Instagram նկարներ.</strong> Բացեք Instagram-ը, գտեք @lady_zone_fitness_club-ի ցանկացած նկար, պահպանեք այն (screenshot կամ download), ապա վերբեռնեք ձեր կայքի նույն թղթապանակում և փոխարինեք "via.placeholder.com" հղումները ձեր նկարների հասցեներով:</p>
-    </div>
 
-    <!-- Real Instagram Reel Embed -->
-    <div class="insta-embed-wrapper">
-      <p><i class="fab fa-instagram"></i> 🎥 Տեսանյութ (Reel) մեր էջից</p>
-      <iframe src="https://www.instagram.com/reel/DBXxq9xIOpZ/embed" width="100%" height="450" frameborder="0" style="border-radius: 20px;"></iframe>
-    </div>
-
-    <div style="background: var(--card-bg); border-left: 4px solid var(--pink-logo); padding: 30px; border-radius: 24px; margin-top: 20px;">
-      <p style="font-style: italic;">«Լավագույն որոշումն էր միանալ Lady Zone-ին: Բարեկազմ մարմին, էներգիա և ընկերական միջավայր» — Անի, Lady Zone անդամ (Instagram-ի արձագանք)</p>
-    </div>
-  </div>
-</section>
-
-<section id="packages">
-  <div class="container">
-    <div class="title-deco"></div>
-    <h2 class="section-title">Փաթեթներ</h2>
-    <div class="packages-cta">
-      <h3>✨ Ամսական անսահմանափակ</h3>
-      <div class="price-badge">35,000 ֏ / ամիս</div>
-      <div class="price-grid">
-        <div class="price-card"><strong>4 պարապմունք</strong> 12,000 ֏</div>
-        <div class="price-card"><strong>8 պարապմունք</strong> 21,000 ֏</div>
-        <div class="price-card"><strong>Անհատական (4x)</strong> 45,000 ֏</div>
+      <!-- Instagram images gallery (replaceable) -->
+      <div class="insta-embed-wrapper">
+        <p style="font-weight: 600;"><i class="fab fa-instagram" style="color:var(--pink-main);"></i> 🖼️ Նկարներ մեր Instagram-ից</p>
+        <div class="instagram-grid" id="customInstaGallery">
+          <div class="instagram-post"><img src="https://via.placeholder.com/300x300/f5f5f5/ec078d?text=+Download+from+IG" alt="IG image"><p>💪 Ուժեղ կանանց մարզում</p></div>
+          <div class="instagram-post"><img src="https://via.placeholder.com/300x300/f5f5f5/ec078d?text=+Lady+Zone+Group" alt="IG image"><p>🧘 Խմբակային յոգա</p></div>
+          <div class="instagram-post"><img src="https://via.placeholder.com/300x300/f5f5f5/ec078d?text=+Fitness+motivation" alt="IG image"><p>🏋️‍♀️ Արդյունքների օր</p></div>
+        </div>
+        <p style="font-size:0.8rem; margin-top:12px;">💡 Իրական Instagram նկարներ ավելացնելու համար՝ պահպանեք @lady_zone_fitness_club-ի նկարները և վերբեռնեք ձեր կայքում՝ փոխարինելով placeholder-ները:</p>
       </div>
-      <a href="tel:+37494015011" class="btn-primary" style="margin-top: 24px;">Գրանցվել անվճար փորձնականին</a>
-    </div>
-  </div>
-</section>
 
-<section id="info">
-  <div class="container">
-    <div class="title-deco"></div>
-    <h2 class="section-title">Կապ և ժամեր</h2>
-    <div class="info-wrapper">
-      <div class="contact-box">
-        <h3>Կենտրոնական գրասենյակ</h3>
-        <div class="contact-item">📍 Ագաթանգեղոսի 6/1, Երևան</div>
-        <div class="contact-item">📞 +374 94 015011 (Դավթաշեն)</div>
-        <div class="contact-item">📞 +374 77 440304 (Քանաքեռ)</div>
-        <div class="contact-item">✉️ ladyfitnessarmenia@mail.ru</div>
-        <div class="contact-item">📱 @lady_zone_fitness_club</div>
+      <!-- Instagram Reel embed -->
+      <div class="insta-embed-wrapper">
+        <p><i class="fab fa-instagram" style="color:var(--pink-main);"></i> 🎥 Տեսանյութ (Reel) մեր էջից</p>
+        <iframe src="https://www.instagram.com/reel/DBXxq9xIOpZ/embed" width="100%" height="450" frameborder="0" style="border-radius: 20px;"></iframe>
       </div>
-      <div class="hours-box">
-        <h3>Աշխատանքային ժամեր</h3>
-        <table class="hours-table">
-          <tr><td>Երկ - Ուրբ</td><td class="highlight">08:00 - 22:00</td></tr>
-          <tr><td>Շաբաթ</td><td class="highlight">09:00 - 22:00</td></tr>
-          <tr><td>Կիրակի</td><td class="highlight">10:00 - 19:00</td></tr>
-        </table>
+
+      <div style="background: white; border-left: 4px solid var(--pink-main); padding: 30px; border-radius: 24px; margin-top: 20px;">
+        <p style="font-style: italic;">«Լավագույն որոշումն էր միանալ Lady Zone-ին: Բարեկազմ մարմին, էներգիա և ընկերական միջավայր» — Անի, Lady Zone անդամ (Instagram-ի արձագանք)</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- Packages -->
+  <section id="packages">
+    <div class="container">
+      <div class="title-deco"></div>
+      <h2 class="section-title">Փաթեթներ</h2>
+      <div class="packages-cta">
+        <h3>✨ Ամսական անսահմանափակ</h3>
+        <div class="price-badge">35,000 ֏ / ամիս</div>
+        <div class="price-grid">
+          <div class="price-card"><strong>4 պարապմունք</strong> 12,000 ֏</div>
+          <div class="price-card"><strong>8 պարապմունք</strong> 21,000 ֏</div>
+          <div class="price-card"><strong>Անհատական (4x)</strong> 45,000 ֏</div>
+        </div>
+        <a href="tel:+37494015011" class="btn-primary" style="margin-top: 24px; display: inline-block;">Գրանցվել անվճար փորձնականին</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Hours -->
+  <section id="info">
+    <div class="container">
+      <div class="title-deco"></div>
+      <h2 class="section-title">Կապ և աշխատանքային ժամեր</h2>
+      <div class="info-wrapper">
+        <div class="contact-box">
+          <h3 style="font-size: 1.6rem;">Կենտրոնական գրասենյակ</h3>
+          <div class="contact-item"><span>📍</span> Ագաթանգեղոսի 6/1, Երևան</div>
+          <div class="contact-item"><span>📞</span> +374 94 015011 (Դավթաշեն)</div>
+          <div class="contact-item"><span>📞</span> +374 77 440304 (Քանաքեռ)</div>
+          <div class="contact-item"><span>✉️</span> ladyfitnessarmenia@mail.ru</div>
+          <div class="contact-item"><span>📱</span> @lady_zone_fitness_club</div>
+        </div>
+        <div class="hours-box">
+          <h3 style="font-size: 1.6rem;">Աշխատանքային ժամեր</h3>
+          <table class="hours-table">
+            <tr><td>Երկ - Ուրբ</td><td class="highlight">08:00 - 22:00</td></tr>
+            <tr><td>Շաբաթ</td><td class="highlight">09:00 - 22:00</td></tr>
+            <tr><td>Կիրակի</td><td class="highlight">10:00 - 19:00</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
 <footer>
   <div class="container">
     <div class="logo-area" style="justify-content: center; margin-bottom: 20px;">
-      <div class="logo-icon"><img src="https://tse4.mm.bing.net/th/id/OIP.z1DNGA9Lb1D6MHm1C-NUKAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="logo"></div>
-      <div class="logo-text">LADY ZONE FITNESS</div>
+      <div class="logo-icon" style="width: 56px; height: 56px;"><img src="https://tse4.mm.bing.net/th/id/OIP.z1DNGA9Lb1D6MHm1C-NUKAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Logo"></div>
+      <div class="logo-text" style="color: white;">LADY ZONE</div>
     </div>
     <p>© 2026 Lady Zone Fitness Club | Երևան, Հայաստան</p>
   </div>
