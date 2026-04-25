@@ -1,142 +1,211 @@
-{% schema %}
-{
-  "name": "Premium Video Experience",
-  "settings": [],
-  "blocks": [
-    {
-      "type": "video",
-      "name": "Video",
-      "settings": [
-        {"type":"url","id":"video_url","label":"Video URL"},
-        {"type":"text","id":"heading","label":"Heading","default":"Feel Strong"},
-        {"type":"textarea","id":"text","label":"Description","default":"Your transformation starts here."}
-      ]
-    }
-  ],
-  "presets": [{"name":"Premium Video Experience"}]
-}
-{% endschema %}
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lady Zone Fitness Club</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-.premium-video {
-  padding: 100px 20px;
-  background: radial-gradient(circle at top, #111 0%, #000 100%);
+:root{
+  --pink:#FF3D7F;
+  --orange:#FF6A2A;
+  --black:#0B0B0F;
+  --dark:#1A1A22;
+  --gray:#B8B8C2;
+  --white:#F5F5F7;
 }
 
-.premium-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr 1fr;
-  gap: 25px;
-  align-items: center;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+
+body{
+  background:var(--black);
+  color:var(--white);
 }
 
-.video-card {
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  transform: scale(0.9);
-  opacity: 0.6;
-  transition: all 0.6s cubic-bezier(.22,1,.36,1);
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px);
+/* HERO VIDEO */
+.hero{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
 }
 
-.video-card.active {
-  transform: scale(1.05);
-  opacity: 1;
-  box-shadow: 0 25px 80px rgba(0,0,0,0.8);
+.hero video{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  top:0;
+  left:0;
+  z-index:-2;
 }
 
-.video-card video {
-  width: 100%;
-  height: 420px;
-  object-fit: cover;
+.overlay{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3));
+  z-index:-1;
 }
 
-.overlay {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 30px;
-  background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+.logo{
+  width:90px;
+  border-radius:50%;
+  margin-bottom:20px;
+  border:2px solid var(--pink);
+  box-shadow:0 0 20px rgba(255,61,127,0.4);
 }
 
-.overlay h2 {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 10px;
+.hero h1{
+  font-size:48px;
 }
 
-.overlay p {
-  font-size: 15px;
-  opacity: 0.85;
+.hero span{color:var(--pink);}
+
+.hero p{
+  margin-top:15px;
+  color:var(--gray);
 }
 
-.glow {
-  position: absolute;
-  inset: 0;
-  border-radius: 24px;
-  pointer-events: none;
-  background: radial-gradient(circle at var(--x) var(--y), rgba(0,255,150,0.25), transparent 40%);
-  opacity: 0;
-  transition: opacity 0.3s;
+.btn{
+  margin-top:25px;
+  padding:14px 30px;
+  border-radius:40px;
+  text-decoration:none;
+  color:white;
+  font-weight:600;
+  background:linear-gradient(135deg,var(--pink),var(--orange));
+  box-shadow:0 10px 30px rgba(255,61,127,0.4);
 }
 
-.video-card:hover .glow {
-  opacity: 1;
+/* SECTION */
+.section{
+  padding:80px 20px;
+  text-align:center;
 }
 
-@media(max-width: 900px){
-  .premium-grid {
-    grid-template-columns: 1fr;
-  }
-  .video-card {
-    transform: scale(1);
-    opacity: 1;
-  }
-  .video-card video {
-    height: 280px;
-  }
+.section h2{
+  font-size:34px;
+  margin-bottom:30px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:var(--dark);
+  padding:30px;
+  border-radius:20px;
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  background:rgba(255,61,127,0.1);
+}
+
+/* VIDEO SECTION */
+.video-section{
+  padding:80px 20px;
+  text-align:center;
+}
+
+.video-wrapper{
+  max-width:800px;
+  margin:auto;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* CTA */
+.cta{
+  padding:80px 20px;
+  text-align:center;
+  background:var(--dark);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:30px;
+  color:var(--gray);
 }
 </style>
+</head>
 
-<div class="premium-video">
-  <div class="premium-grid">
-    {% for block in section.blocks %}
-      <div class="video-card {% if forloop.index == 2 %}active{% endif %}">
-        <div class="glow"></div>
-        <video autoplay muted loop playsinline>
-          <source src="{{ block.settings.video_url }}" type="video/mp4">
-        </video>
-        <div class="overlay">
-          <h2>{{ block.settings.heading }}</h2>
-          <p>{{ block.settings.text }}</p>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+
+<video autoplay muted loop>
+  <!-- REPLACE WITH REAL VIDEO FILE -->
+  <source src="https://cdn.coverr.co/videos/coverr-woman-training-in-gym-1574/1080p.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<div>
+  <img class="logo" src="https://instagram.fevn15-1.fna.fbcdn.net/v/t51.2885-19/417924605_408958391694121_5034653283248458168_n.jpg">
+
+  <h1>Train in Your <span>Own Zone</span></h1>
+  <p>Կանանց ֆիթնես տարածք՝ ուժ, վստահություն և արդյունք 💖🔥</p>
+  <a href="tel:+37494015011" class="btn">Գրանցվել</a>
 </div>
 
-<script>
-const cards = document.querySelectorAll('.video-card');
+</section>
 
-cards.forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    card.style.setProperty('--x', x + 'px');
-    card.style.setProperty('--y', y + 'px');
-  });
-});
+<!-- FEATURES -->
+<section class="section">
+  <h2>Ինչու ընտրել Lady Zone</h2>
+  <div class="grid">
+    <div class="card">🔒 Women Only</div>
+    <div class="card">💗 Community</div>
+    <div class="card">🔥 Group Training</div>
+  </div>
+</section>
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('active');
-    }
-  });
-}, {threshold: 0.4});
+<!-- CLASSES -->
+<section class="section">
+  <h2>Դասընթացներ</h2>
+  <div class="grid">
+    <div class="card">Pilates</div>
+    <div class="card">Zumba</div>
+    <div class="card">Yoga</div>
+    <div class="card">Strength</div>
+  </div>
+</section>
 
-cards.forEach(card => observer.observe(card));
-</script>
+<!-- VIDEO REEL -->
+<section class="video-section">
+  <h2>Տեսանյութ մեր ակումբից</h2>
+
+  <div class="video-wrapper">
+    <iframe src="https://www.instagram.com/reel/DBXxq9xIOpZ/embed"
+      width="100%" height="500" frameborder="0"></iframe>
+  </div>
+
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Սկսիր այսօր</h2>
+  <p>Միացի՛ր Lady Zone-ին և փոխիր քո կյանքը</p>
+  <a href="tel:+37494015011" class="btn">Book Now</a>
+</section>
+
+<footer>
+© Lady Zone Fitness Club — Yerevan
+</footer>
+
+</body>
+</html>
