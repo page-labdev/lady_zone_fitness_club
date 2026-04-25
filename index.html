@@ -1,119 +1,115 @@
 {% schema %}
 {
-  "name": "Modern Video Showcase",
+  "name": "Premium Video Experience",
   "settings": [],
   "blocks": [
     {
       "type": "video",
       "name": "Video",
       "settings": [
-        {
-          "type": "url",
-          "id": "video_url",
-          "label": "Video URL (MP4)"
-        },
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Heading",
-          "default": "Your Title"
-        },
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "Description",
-          "default": "Short engaging description goes here."
-        }
+        {"type":"url","id":"video_url","label":"Video URL"},
+        {"type":"text","id":"heading","label":"Heading","default":"Feel Strong"},
+        {"type":"textarea","id":"text","label":"Description","default":"Your transformation starts here."}
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Modern Video Showcase"
-    }
-  ]
+  "presets": [{"name":"Premium Video Experience"}]
 }
 {% endschema %}
 
 <style>
-.video-section {
-  padding: 80px 20px;
-  background: linear-gradient(180deg, #0f0f0f, #1a1a1a);
+.premium-video {
+  padding: 100px 20px;
+  background: radial-gradient(circle at top, #111 0%, #000 100%);
 }
 
-.video-grid {
+.premium-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 25px;
+  align-items: center;
 }
 
 .video-card {
   position: relative;
-  border-radius: 20px;
+  border-radius: 24px;
   overflow: hidden;
-  background: #111;
+  transform: scale(0.9);
+  opacity: 0.6;
+  transition: all 0.6s cubic-bezier(.22,1,.36,1);
   border: 1px solid rgba(255,255,255,0.08);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  backdrop-filter: blur(12px);
 }
 
-.video-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+.video-card.active {
+  transform: scale(1.05);
+  opacity: 1;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.8);
 }
 
 .video-card video {
   width: 100%;
-  height: 100%;
+  height: 420px;
   object-fit: cover;
 }
 
-.video-overlay {
+.overlay {
   position: absolute;
   bottom: 0;
-  left: 0;
   width: 100%;
-  padding: 25px;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-  color: white;
+  padding: 30px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
 }
 
-.video-overlay h3 {
-  font-size: 20px;
-  margin-bottom: 8px;
+.overlay h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
-.video-overlay p {
-  font-size: 14px;
-  opacity: 0.8;
+.overlay p {
+  font-size: 15px;
+  opacity: 0.85;
 }
 
-.fade-in {
+.glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--x) var(--y), rgba(0,255,150,0.25), transparent 40%);
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
+  transition: opacity 0.3s;
 }
 
-.fade-in.visible {
+.video-card:hover .glow {
   opacity: 1;
-  transform: translateY(0);
 }
 
-@media (max-width: 900px) {
-  .video-grid {
+@media(max-width: 900px){
+  .premium-grid {
     grid-template-columns: 1fr;
+  }
+  .video-card {
+    transform: scale(1);
+    opacity: 1;
+  }
+  .video-card video {
+    height: 280px;
   }
 }
 </style>
 
-<div class="video-section">
-  <div class="video-grid">
+<div class="premium-video">
+  <div class="premium-grid">
     {% for block in section.blocks %}
-      <div class="video-card fade-in">
+      <div class="video-card {% if forloop.index == 2 %}active{% endif %}">
+        <div class="glow"></div>
         <video autoplay muted loop playsinline>
           <source src="{{ block.settings.video_url }}" type="video/mp4">
         </video>
-        <div class="video-overlay">
-          <h3>{{ block.settings.heading }}</h3>
+        <div class="overlay">
+          <h2>{{ block.settings.heading }}</h2>
           <p>{{ block.settings.text }}</p>
         </div>
       </div>
@@ -122,15 +118,25 @@
 </div>
 
 <script>
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-    }
+const cards = document.querySelectorAll('.video-card');
+
+cards.forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--x', x + 'px');
+    card.style.setProperty('--y', y + 'px');
   });
 });
 
-document.querySelectorAll('.fade-in').forEach(el => {
-  observer.observe(el);
-});
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('active');
+    }
+  });
+}, {threshold: 0.4});
+
+cards.forEach(card => observer.observe(card));
 </script>
