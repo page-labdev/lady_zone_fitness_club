@@ -364,7 +364,50 @@
     }
     .instagram-post img { width: 100%; display: block; aspect-ratio: 4/3; object-fit: cover; }
     .instagram-post p { padding: 16px; font-size: 0.85rem; color: var(--text-muted); background: white; }
+.video-hero {
+  position: relative;
+  width: 100%;
+  height: 450px; /* controls banner height */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
 
+.video-hero video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+}
+
+.video-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+}
+
+.video-content h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.video-content p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
     /* footer */
     footer {
       background: #111214;
@@ -482,7 +525,20 @@
           <span>LADY ZONE</span> <span>FITNESS</span> <span>PILATES</span> <span>YOGA</span> <span>WOMEN</span> <span>STRENGTH</span>
         </div>
       </div>
+      
+<section class="video-hero">
+  <video autoplay muted loop playsinline>
+    <source src="https://cdn.shopify.com/videos/c/o/v/4ae513d21efb41898353fb2092b50180.mp4" type="video/mp4">
+  </video>
 
+  <div class="video-overlay"></div>
+
+  <div class="video-content">
+    <h1>Lady Zone Fitness Club</h1>
+    <p>Women-only fitness space</p>
+    <a href="#contact" class="btn-primary">Join Now</a>
+  </div>
+</section>
   <!-- Packages section with new offer -->
   <section id="packages">
     <div class="container">
