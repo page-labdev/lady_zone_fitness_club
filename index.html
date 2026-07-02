@@ -62,10 +62,6 @@
     .hover-lift {
       transition: all 0.3s ease;
     }
-    .hover-lift:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-lg);
-    }
 
     /* navbar */
     .navbar {
@@ -126,8 +122,6 @@
       font-size: 0.9rem;
       font-weight: 550;
     }
-    .nav-links a:hover { color: var(--pink); }
-
     .btn-primary {
       background: var(--pink);
       color: white;
@@ -141,8 +135,10 @@
       text-decoration: none;
       font-size: 0.95rem;
       box-shadow: 0 4px 12px rgba(225, 29, 140, 0.25);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
-    .btn-primary:hover { background: var(--pink-dark); transform: scale(1.02); box-shadow: 0 8px 20px rgba(225, 29, 140, 0.3); }
+    .btn-primary:active { background: var(--pink-dark); transform: scale(0.98); }
     .btn-outline {
       border: 1.5px solid var(--pink);
       background: transparent;
@@ -153,8 +149,10 @@
       color: var(--pink);
       text-decoration: none;
       font-size: 0.95rem;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
-    .btn-outline:hover { background: var(--pink-soft); transform: translateY(-2px); }
+    .btn-outline:active { background: var(--pink-soft); }
 
     /* cards */
     .glass-card {
@@ -202,11 +200,10 @@
       transition: 0.25s;
       box-shadow: var(--shadow-sm);
     }
-    .branch-card:hover { border-color: var(--pink); background: #fff; }
     .branch-card h3 { font-size: 1.5rem; margin-bottom: 12px; font-weight: 700; letter-spacing: -0.2px; }
     .branch-addr { color: var(--text-muted); margin: 14px 0; line-height: 1.5; font-size: 0.95rem; }
     .branch-phone { display: inline-block; margin-top: 8px; color: var(--pink); font-weight: 600; text-decoration: none; border-bottom: 1px dotted transparent; transition: 0.2s; }
-    .branch-phone:hover { border-bottom-color: var(--pink); }
+
 
     .benefits-grid {
       display: flex;
@@ -312,7 +309,7 @@
       color: var(--text-dark);
       font-weight: 800;
     }
-    .price-card:hover { background: white; border-color: var(--pink); transform: scale(0.98); }
+
 
     /* contact info block */
     .info-wrapper {
@@ -418,47 +415,56 @@
       margin-top: 60px;
     }
 
+    /* hover effects only apply on devices that support real hovering (mouse/trackpad) —
+       this prevents buttons/cards from getting stuck in a "hovered" look after a tap on mobile */
+    @media (hover: hover) and (pointer: fine) {
+      .nav-links a:hover { color: var(--pink); }
+      .btn-primary:hover { background: var(--pink-dark); transform: scale(1.02); box-shadow: 0 8px 20px rgba(225, 29, 140, 0.3); }
+      .btn-outline:hover { background: var(--pink-soft); transform: translateY(-2px); }
+      .hover-lift:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+      .branch-card:hover { border-color: var(--pink); background: #fff; }
+      .branch-phone:hover { border-bottom-color: var(--pink); }
+      .price-card:hover { background: white; border-color: var(--pink); transform: scale(0.98); }
+    }
+
     /* responsive */
     @media (max-width: 768px) {
       .container { padding: 0 20px; }
       .nav-container { flex-direction: column; text-align: center; }
       .logo-area { justify-content: center; }
-      .nav-links { justify-content: center; gap: 20px; }
+      .logo-icon { width: 64px; height: 64px; border-radius: 32px; }
+      .logo-text { font-size: 1.5rem; }
+      .nav-links { justify-content: center; gap: 16px; }
+      .nav-links a { font-size: 0.85rem; }
       .section-title { font-size: 1.9rem; }
       .glass-card { padding: 36px 24px; }
-      .btn-primary, .btn-outline { padding: 10px 22px; font-size: 0.85rem; }
+      #home .glass-card > div { flex-direction: column; }
+      #heroReveal h1 { font-size: 2.1rem; }
+      .btn-primary, .btn-outline { padding: 12px 24px; font-size: 0.9rem; width: 100%; text-align: center; }
+      #heroReveal div[style*="gap: 18px"] { flex-direction: column; }
       .price-card { min-width: 140px; padding: 18px 16px; }
-      .info-wrapper { padding: 32px 24px; gap: 32px; }
+      .info-wrapper { padding: 32px 24px; gap: 32px; flex-direction: column; }
       .benefit-card { min-width: 100%; }
       .branch-card { padding: 22px 20px; }
+      .video-hero { height: 320px; }
+      .video-content h1 { font-size: 1.8rem; }
+      .video-content p { font-size: 0.95rem; }
+      .video-content .btn-primary { width: auto; }
+      .instagram-media { min-width: 0 !important; }
     }
     @media (max-width: 480px) {
       .price-grid { flex-direction: column; align-items: stretch; }
       .price-card { width: 100%; text-align: center; }
       .contact-item { flex-wrap: wrap; gap: 8px; }
       .contact-label { min-width: auto; width: 70px; }
+      #heroReveal h1 { font-size: 1.7rem; }
+      .video-hero { height: 260px; }
+      .video-content h1 { font-size: 1.4rem; }
     }
     /* no icons, no emojis */
     .contact-item span:first-child { font-weight: 600; color: var(--pink); min-width: 70px; }
     .branch-card h3::before, .benefit-card h4::before { content: none; }
-  
-@media (max-width:768px){
-.logo-icon{width:70px;height:70px}
-.logo-text{font-size:1.5rem}
-.nav-links{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
-.glass-card>div{flex-direction:column}
-.video-hero{height:300px}
-.video-content h1{font-size:2rem}
-.video-content p{font-size:1rem}
-.branch-card,.benefit-card,.packages-cta,.info-wrapper{border-radius:24px}
-}
-@media (max-width:480px){
-.video-hero{height:240px}
-.video-content h1{font-size:1.6rem}
-.btn-primary,.btn-outline{display:block;width:100%;text-align:center}
-}
-
-</style>
+  </style>
 </head>
 <body>
 
@@ -497,8 +503,7 @@
           </div>
           <div style="flex: 0.8; background: var(--pink-glow); border-radius: 36px; padding: 32px 24px; text-align: center; backdrop-filter: blur(2px);">
             <h3 style="font-size: 2.4rem; font-weight: 800; color: var(--pink);">12+</h3>
-            <p style="margin-bottom: 18px; font-weight: 500;">Հարմարավետ մասնաճյուղեր</p>
-            
+            <p style="font-weight: 500;">Հարմարավետ մասնաճյուղեր</p>
           </div>
         </div>
       </div>
@@ -641,7 +646,7 @@
     branchesData.forEach(b => {
       const card = document.createElement("div");
       card.className = "branch-card hover-lift";
-      card.innerHTML = `<h3>${b.name}</h3><div class="branch-addr">Հասցե: ${b.address}</div><a class="branch-phone" href="tel:${b.phone.replace(/\s/g,"")}">Հեռ: ${b.phone}</a><br><a class="btn-outline" target="_blank" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(b.address+", Yerevan, Armenia")}">View on Google Maps</a>`;
+      card.innerHTML = `<h3>${b.name}</h3><div class="branch-addr">Հասցե: ${b.address}</div><div class="branch-phone">Հեռ: ${b.phone}</div>`;
       grid.appendChild(card);
     });
   }
