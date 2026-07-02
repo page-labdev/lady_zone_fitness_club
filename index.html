@@ -18,6 +18,7 @@
       color: #1a1a1a;
       scroll-behavior: smooth;
       line-height: 1.5;
+      overflow-x: hidden;
     }
 
     :root {
@@ -122,6 +123,32 @@
       font-size: 0.9rem;
       font-weight: 550;
     }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: 0.25s;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     .btn-primary {
       background: var(--pink);
       color: white;
@@ -451,23 +478,30 @@
     /* responsive */
     @media (max-width: 768px) {
       .container { padding: 0 16px; }
-      .navbar { padding: 10px 0; }
-      .nav-container { flex-direction: column; align-items: stretch; text-align: center; gap: 8px; }
-      .logo-area { justify-content: center; gap: 8px; }
-      .logo-icon { width: 44px; height: 44px; border-radius: 22px; }
-      .logo-text { font-size: 1.15rem; }
+      .navbar { padding: 12px 0; }
+      .nav-container { flex-direction: row; align-items: center; justify-content: space-between; text-align: left; gap: 8px; position: relative; flex-wrap: nowrap; }
+      .logo-area { justify-content: flex-start; gap: 8px; }
+      .logo-icon { width: 42px; height: 42px; border-radius: 21px; }
+      .logo-text { font-size: 1.1rem; }
+      .nav-toggle { display: flex; }
       .nav-links {
-        justify-content: flex-start;
-        flex-wrap: nowrap;
-        gap: 14px;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        padding: 2px 4px;
-        margin: 0 -4px;
+        display: none;
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: #111214;
+        border-radius: 18px;
+        padding: 8px;
+        box-shadow: var(--shadow-lg);
+        z-index: 999;
       }
-      .nav-links::-webkit-scrollbar { display: none; }
-      .nav-links a { font-size: 0.72rem; white-space: nowrap; font-weight: 600; letter-spacing: 0.1px; }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 0.95rem; font-weight: 600; padding: 13px 16px; border-radius: 12px; color: #e5e5e5; }
+      .nav-links a:active { background: rgba(225,29,140,0.15); color: var(--pink); }
       .section-title { font-size: 1.9rem; }
       .glass-card { padding: 28px 22px; }
       #home { padding-top: 24px !important; }
@@ -497,10 +531,8 @@
       .video-hero { height: 260px; }
       .video-content h1 { font-size: 1.4rem; }
       .branches-grid { grid-template-columns: 1fr; }
-      .logo-icon { width: 38px; height: 38px; border-radius: 19px; }
-      .logo-text { font-size: 1rem; }
-      .nav-links a { font-size: 0.68rem; }
-      .nav-links { gap: 10px; }
+      .logo-icon { width: 36px; height: 36px; border-radius: 18px; }
+      .logo-text { font-size: 0.95rem; }
     }
     /* no icons, no emojis */
     .contact-item span:first-child { font-weight: 600; color: var(--pink); min-width: 70px; }
@@ -517,13 +549,16 @@
       </div>
       <div class="logo-text">LADY <span>ZONE</span></div>
     </div>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="#home">ԳԼԽԱՎՈՐ</a>
       <a href="#branches">ՄԱՍՆԱՃՅՈՒՂԵՐ</a>
       <a href="#benefits">ԱՌԱՎԵԼՈՒԹՅՈՒՆՆԵՐ</a>
       <a href="#packages">ՓԱԹԵԹՆԵՐ</a>
       <a href="#info">ԿՈՆՏԱԿՏ</a>
     </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Ընտրացանկ" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -694,6 +729,17 @@
     });
   }
 
+  // hamburger menu toggle (mobile)
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function() {
+      const isOpen = navLinks.classList.toggle('open');
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+
   // smooth scroll
   document.querySelectorAll('.nav-links a').forEach(a => {
     a.addEventListener('click', function(e) {
@@ -702,6 +748,11 @@
         e.preventDefault();
         const target = document.querySelector(href);
         if(target) target.scrollIntoView({ behavior: 'smooth' });
+      }
+      if (navLinks && navLinks.classList.contains('open')) {
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
       }
     });
   });
